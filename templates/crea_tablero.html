@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Crea tu tablero de Buscaminas</title>
+</head>
+<body>
+    <h1>Crea tu tablero de Buscaminas</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Crear Tablero</button>
+    </form>
+</body>
+</html>
