@@ -1,7 +1,8 @@
-from django.urls import path
-from buscaminas1 import views
+from django.contrib import admin
+from django.urls import include, path
 
 urlpatterns = [
-    path('', views.crea_tablero, name='nombre_de_la_vista'),
-    path('crea_tablero/', views.crea_tablero, name='crea_tablero'),
+    path('admin/', admin.site.urls),
+    path('buscaminas1/', include('buscaminas1.urls')),
+    path('', include('buscaminas1.urls'))
 ]

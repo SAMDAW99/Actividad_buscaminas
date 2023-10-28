@@ -1,19 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+
 from .forms import TableroForm
-from .models import Tablero
+
+
+def welcome(request):
+    return render(request, 'buscaminas1/index.html', {})
 
 
 def crea_tablero(request):
-    if request.method == 'POST':
-        form = TableroForm(request.POST)
+    form = TableroForm()
+    if request.method == 'GET':
+        form = TableroForm(request.GET)
         if form.is_valid():
-            dimension_x = form.cleaned_data['dimension_x']
-            dimension_y = form.cleaned_data['dimension_y']
-
-            tablero = Tablero.objects.create(dimension_x=dimension_x, dimension_y=dimension_y)
-
-            return redirect('muestra_tablero', tablero_id=tablero.id)
-    else:
-        form = TableroForm()
-
-    return render(request, 'crea_tablero.html', {'form': form})
+            columnas = form.cleaned_data['columnas']
+            filas = form.cleaned_data['filas']
+            return render(request, 'buscaminas1/mostrar_tablero.html', {'filas': filas, 'columnas':columnas,'rango_filas':range(filas), 'rango_columnas': range(columnas)})
+    return render(request, 'buscaminas1/crea_tablero.html', {'form': form})
